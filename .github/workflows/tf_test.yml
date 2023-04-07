@@ -5,6 +5,10 @@ jobs:
   tf_base:
     runs-on: [Linux]
     steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Terraform fmt_check
         uses: otc-code/gh-actions/terraform@main
         with:
