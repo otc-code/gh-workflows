@@ -27,7 +27,8 @@ jobs:
         with:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'validate'
-      - name: Terraform validate
+
+      - name: Terraform compliance
         uses: otc-code/gh-actions/terraform@main
         with:
           TF_DIR: '${{ github.workspace }}'
@@ -43,6 +44,7 @@ jobs:
         uses: checkmarx/kics-github-action@v1.6.3
         with:
           path: '${{ github.workspace }}'
+          output_path: '${{ github.workspace }}/.results'
           ignore_on_exit: results
           cloud_provider: 'aws, azure, gcp'
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -53,3 +55,4 @@ jobs:
         with:
           files: |
             ${{ github.workspace }}/.results/*.junit.xml.local
+            ${{ github.workspace }}/.results/*.json
