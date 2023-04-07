@@ -15,6 +15,7 @@ jobs:
         with:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'fmt_check'
+
       - name: Terraform init
         uses: otc-code/gh-actions/terraform@main
         with:
