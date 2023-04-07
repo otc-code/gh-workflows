@@ -2,9 +2,25 @@ on:
   workflow_call:
 
 jobs:
+  tf_docs:
+    name: Update docs
+    runs-on: [Linux]
+    if: github.event_name == 'push'
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Update - Docs
+        uses: otc-code/gh-actions/docs@main
+        with:
+          TF_DIR: '${{ github.workspace }}'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
   tf_base:
     name: Base check
     runs-on: [Linux]
+    if: github.event_name == 'pull_request'
     steps:
       - uses: actions/checkout@v3
         with:
