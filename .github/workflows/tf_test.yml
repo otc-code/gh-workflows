@@ -47,6 +47,4 @@ jobs:
         if: always()
         with:
           files: |
-            ${{ github.workspace }}**/*.xml.local
-            test-results/**/*.trx
-            test-results/**/*.json
+            ${{ github.workspace }}/.results/*.junit.xml.local
