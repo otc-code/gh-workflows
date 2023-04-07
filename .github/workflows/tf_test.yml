@@ -3,6 +3,7 @@ on:
 
 jobs:
   tf_base:
+    name: Base check
     runs-on: [Linux]
     steps:
       - uses: actions/checkout@v3
