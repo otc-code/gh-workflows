@@ -1,7 +1,7 @@
 on:
   workflow_call:
     secrets:
-      GITHUB_TOKEN:
+      TOKEN:
         required: true
 jobs:
   tf_base:
@@ -35,7 +35,7 @@ jobs:
         with:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'compliance'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
 
       - name: Terraform security
         uses: checkmarx/kics-github-action@v1.6.3
@@ -43,4 +43,4 @@ jobs:
           path: '${{ github.workspace }}'
           ignore_on_exit: results
           cloud_provider: 'aws, azure, gcp'
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ secrets.TOKEN }}
