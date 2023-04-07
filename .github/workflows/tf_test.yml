@@ -5,4 +5,8 @@ jobs:
   tf_base:
     runs-on: [Linux]
     steps:
-    - run: echo "Hello World"
+      - name: Terraform fmt_check
+        uses: otc-code/gh-actions/terraform@main
+        with:
+          TF_DIR: '${{ github.workspace }}'
+          TERRAFORM_ACTION: 'fmt_check' 
