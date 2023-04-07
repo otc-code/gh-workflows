@@ -20,6 +20,8 @@ jobs:
     name: Base check
     runs-on: [Linux]
     if: github.event_name == 'pull_request'
+    outputs:
+      paths: ${{ steps.list-files.outputs.paths }}
     steps:
       - uses: actions/checkout@v3
         with:
@@ -72,3 +74,23 @@ jobs:
             ${{ github.workspace }}/.results/*.junit.xml.local
           check_name: 'Terraform Base check'
           #fail_on: 'errors'
+
+      - name: List tfvars Files
+        id: list-files
+        uses: mirko-felice/list-files-action@v3.0.1
+        with:
+          path: "${{ github.workspace }}/examples"
+          ext: "tfvars"
+
+  tf_deploy:
+    name: Deploy Test
+    runs-on: [Linux]
+    if: github.event_name == 'pull_request'
+    needs: list-files
+    strategy:
+      matrix:
+        paths: ${{ fromJson(needs.list-files.outputs.paths) }}
+    steps:
+      - name: Output results
+        run: |
+          echo ${{ matrix.paths }}
