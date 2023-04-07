@@ -16,7 +16,6 @@ jobs:
           TF_DIR: '${{ github.workspace }}'
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-
   tf_base:
     name: Base check
     runs-on: [Linux]
