@@ -55,5 +55,5 @@ jobs:
         with:
           files: |
             ${{ github.workspace }}/.results/*.junit.xml.local
-          check_name: 'Base check'
+          check_name: 'Terraform Base check'
           #fail_on: 'errors'
