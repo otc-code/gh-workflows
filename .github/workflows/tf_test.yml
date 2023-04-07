@@ -9,4 +9,29 @@ jobs:
         uses: otc-code/gh-actions/terraform@main
         with:
           TF_DIR: '${{ github.workspace }}'
-          TERRAFORM_ACTION: 'fmt_check' 
+          TERRAFORM_ACTION: 'fmt_check'
+      - name: Terraform init
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}'
+          TERRAFORM_ACTION: 'init'
+
+      - name: Terraform validate
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}'
+          TERRAFORM_ACTION: 'validate'
+
+      - name: Terraform compliance
+        uses: ./terraform/
+        with:
+          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TERRAFORM_ACTION: 'compliance'
+
+      - name: Terraform security
+        uses: checkmarx/kics-github-action@v1.6.3
+        with:
+          path: '${{ github.workspace }}/azr-storage'
+          ignore_on_exit: results
+          cloud_provider: 'aws, azure, gcp'
+          token: ${{ secrets.ORG_GITHUB_TOKEN }}
