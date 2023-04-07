@@ -56,4 +56,4 @@ jobs:
           files: |
             ${{ github.workspace }}/.results/*.junit.xml.local
           check_name: 'Base check'
-          fail_on: 'errors'
+          #fail_on: 'errors'
