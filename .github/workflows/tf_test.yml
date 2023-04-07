@@ -31,7 +31,7 @@ jobs:
       - name: Terraform compliance
         uses: otc-code/gh-actions/terraform@main
         with:
-          TF_DIR: '${{ github.workspace }}/test/terraform'
+          TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'compliance'
 
       - name: Terraform security
