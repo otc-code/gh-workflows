@@ -1,6 +1,10 @@
 on:
   workflow_call:
 
+permissions:
+  security-events: write
+  contents: write
+
 jobs:
   tf_base:
     name: Base check
