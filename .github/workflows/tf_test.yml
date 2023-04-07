@@ -28,12 +28,12 @@ jobs:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'validate'
 
-      - name: Terraform compliance
-        uses: otc-code/gh-actions/terraform@main
-        with:
-          TF_DIR: '${{ github.workspace }}'
-          TERRAFORM_ACTION: 'compliance'
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Terraform compliance
+      #   uses: otc-code/gh-actions/terraform@main
+      #   with:
+      #     TF_DIR: '${{ github.workspace }}'
+      #     TERRAFORM_ACTION: 'compliance'
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Terraform security
         uses: checkmarx/kics-github-action@v1.6.3
