@@ -40,7 +40,7 @@ jobs:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'security'
 
-      - name: Terraform security (KICS)
+      - name: IaC security (KICS)
         uses: checkmarx/kics-github-action@v1.6.3
         with:
           path: '${{ github.workspace }}'
@@ -55,4 +55,3 @@ jobs:
         with:
           files: |
             ${{ github.workspace }}/.results/*.junit.xml.local
-            ${{ github.workspace }}/.results/*.json
