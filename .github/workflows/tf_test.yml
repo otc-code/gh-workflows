@@ -27,6 +27,11 @@ jobs:
         with:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'validate'
+      - name: Terraform validate
+        uses: otc-code/gh-actions/terraform@main
+        with:
+          TF_DIR: '${{ github.workspace }}'
+          TERRAFORM_ACTION: 'compliance'
 
       - name: Terraform security (checkov)
         uses: otc-code/gh-actions/terraform@main
