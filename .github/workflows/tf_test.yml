@@ -35,7 +35,7 @@ jobs:
           TERRAFORM_ACTION: 'compliance'
 
       - name: Terraform security
-        uses: checkmarx/kics-github-action@v1.6.13
+        uses: checkmarx/kics-github-action@v1.6.3
         with:
           path: '${{ github.workspace }}'
           ignore_on_exit: results
