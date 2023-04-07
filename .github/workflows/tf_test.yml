@@ -86,10 +86,10 @@ jobs:
     name: Deploy Test
     runs-on: [Linux]
     if: github.event_name == 'pull_request'
-    needs: list-files
+    needs: tf_base
     strategy:
       matrix:
-        paths: ${{ fromJson(needs.list-files.outputs.paths) }}
+        paths: ${{ fromJson(needs.tf_base.outputs.paths) }}
     steps:
       - name: Output results
         run: |
