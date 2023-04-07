@@ -28,10 +28,13 @@ jobs:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'validate'
 
-      - name: Check linting of Terraform files
-        uses: devops-infra/action-tflint@v0.3
+      - name: Terraform security (checkov)
+        uses: otc-code/gh-actions/terraform@main
+        with:
+          TF_DIR: '${{ github.workspace }}'
+          TERRAFORM_ACTION: 'security'
 
-      - name: Terraform security
+      - name: Terraform security (KICS)
         uses: checkmarx/kics-github-action@v1.6.3
         with:
           path: '${{ github.workspace }}'
