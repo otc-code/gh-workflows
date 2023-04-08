@@ -95,3 +95,4 @@ jobs:
       - name: Output results
         run: |
           echo ${{ needs.tf_base.outputs.dirs }}
+          echo ${{ needs.tf_base.outputs.files }}
