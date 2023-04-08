@@ -21,7 +21,12 @@ jobs:
     runs-on: [Linux]
     if: github.event_name == 'pull_request'
     outputs:
-      paths: ${{ steps.list-files.outputs.paths }}
+      files:
+        value: ${{ steps.files.outputs.files }}
+        description: "List of all matching files"
+      dirs:
+        value: ${{ steps.files.outputs.files }}
+        description: "List of all matching files"
     steps:
       - uses: actions/checkout@v3
         with:
@@ -66,6 +71,13 @@ jobs:
           cloud_provider: 'aws, azure, gcp'
           token: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Get Examples
+        id: files
+        uses: otc-code/gh-actions/helper@main
+        with:
+          path: '${{ github.workspace }}'
+          ext: 'tfvars'
+
       - name: Publish Test Results
         uses: EnricoMi/publish-unit-test-result-action/composite@v2
         if: always()
@@ -75,13 +87,6 @@ jobs:
           check_name: 'Terraform Base check'
           #fail_on: 'errors'
 
-      - name: List tfvars Files
-        id: list-files
-        uses: mirko-felice/list-files-action@v3.0.1
-        with:
-          path: "${{ github.workspace }}/examples"
-          ext: "tfvars"
-
   tf_deploy:
     name: Deploy Test
     runs-on: [Linux]
@@ -89,8 +94,8 @@ jobs:
     needs: tf_base
     strategy:
       matrix:
-        paths: ${{ fromJson(needs.tf_base.outputs.paths) }}
+        paths: ${{ fromJson(needs.tf_base.outputs.dirs) }}
     steps:
       - name: Output results
         run: |
-          echo ${{ matrix.paths }}
+          echo ${{ matrix.dirs }}
