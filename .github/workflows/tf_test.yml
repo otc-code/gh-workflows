@@ -84,7 +84,7 @@ jobs:
           #fail_on: 'errors'
 
   tf_deploy_example_tfvars:
-    name: Deploy Test (tfvars)
+    name: Deploy Test (${{ matrix.tfvars }})
     runs-on: [Linux]
     if: github.event_name == 'pull_request'
     needs: tf_base
@@ -95,10 +95,9 @@ jobs:
       - name: Output results
         run: |
           echo ${{ matrix.tfvars }}
-          echo ${{ needs.tf_base.outputs.files }}
 
   tf_deploy_example_dirs:
-    name: Deploy Test (dir)
+    name: Deploy Test (${{ matrix.dir }})
     runs-on: [Linux]
     if: github.event_name == 'pull_request'
     needs: tf_base
