@@ -88,10 +88,10 @@ jobs:
     runs-on: [Linux]
     if: github.event_name == 'pull_request'
     needs: tf_base
-    strategy:
-      matrix:
-        paths: ${{ fromJson(needs.tf_base.outputs.dirs) }}
+    # strategy:
+    #   matrix:
+    #     paths: ${{ fromJson(needs.tf_base.outputs.dirs) }}
     steps:
       - name: Output results
         run: |
-          echo ${{ matrix.dirs }}
+          echo ${{ needs.tf_base.outputs.dirs }}
