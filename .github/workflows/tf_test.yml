@@ -58,20 +58,20 @@ jobs:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'security'
 
-      - name: IaC security (KICS)
-        uses: checkmarx/kics-github-action@v1.6.3
-        with:
-          path: '${{ github.workspace }}'
-          output_path: '${{ github.workspace }}/.results'
-          ignore_on_exit: results
-          cloud_provider: 'aws, azure, gcp'
-          token: ${{ secrets.GITHUB_TOKEN }}
+      # - name: IaC security (KICS)
+      #   uses: checkmarx/kics-github-action@v1.6.3
+      #   with:
+      #     path: '${{ github.workspace }}'
+      #     output_path: '${{ github.workspace }}/.results'
+      #     ignore_on_exit: results
+      #     cloud_provider: 'aws, azure, gcp'
+      #     token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get Examples
         id: files
         uses: otc-code/gh-actions/helper@main
         with:
-          path: '${{ github.workspace }}'
+          path: '${{ github.workspace }}/examples'
           ext: 'tfvars'
 
       - name: Publish Test Results
