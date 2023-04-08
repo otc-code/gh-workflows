@@ -83,16 +83,29 @@ jobs:
           check_name: 'Terraform Base check'
           #fail_on: 'errors'
 
-  tf_deploy:
-    name: Deploy Test
+  tf_deploy_example_tfvars:
+    name: Deploy Test (tfvars)
     runs-on: [Linux]
     if: github.event_name == 'pull_request'
     needs: tf_base
-    # strategy:
-    #   matrix:
-    #     paths: ${{ fromJson(needs.tf_base.outputs.dirs) }}
+    strategy:
+      matrix:
+        tfvars: ${{ fromJson(needs.tf_base.outputs.files) }}
     steps:
       - name: Output results
         run: |
-          echo ${{ needs.tf_base.outputs.dirs }}
+          echo ${{ matrix.tfvars }}
           echo ${{ needs.tf_base.outputs.files }}
+
+  tf_deploy_example_dirs:
+    name: Deploy Test (dir)
+    runs-on: [Linux]
+    if: github.event_name == 'pull_request'
+    needs: tf_base
+    strategy:
+      matrix:
+        dir: ${{ fromJson(needs.tf_base.outputs.dirs) }}
+    steps:
+      - name: Output results
+        run: |
+          echo ${{ matrix.dir }}
