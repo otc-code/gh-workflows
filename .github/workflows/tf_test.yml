@@ -5,9 +5,8 @@ on:
         required: false
         type: string
         default: 'false'
+    secrets:
       token:
-        description: "Github token for tf init"
-        type: string
         required: false
 
 jobs:
@@ -48,7 +47,7 @@ jobs:
         with:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'init'
-          GITHUB_TOKEN: ${{ inputs.token }}
+          GITHUB_TOKEN: ${{ secrets.token }}
 
       - name: Terraform validate
         uses: otc-code/gh-actions/terraform@main
