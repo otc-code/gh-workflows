@@ -23,7 +23,7 @@ jobs:
   tf_base:
     name: Base check
     runs-on: [Linux]
-    if: github.event_name == 'pull_request'
+    #if: github.event_name == 'pull_request' 
     outputs:
       files: ${{ steps.files.outputs.files }}
       dirs: ${{ steps.files.outputs.dirs }}
