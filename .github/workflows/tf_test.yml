@@ -62,14 +62,14 @@ jobs:
           TF_DIR: '${{ github.workspace }}'
           TERRAFORM_ACTION: 'security'
 
-      # - name: IaC security (KICS)
-      #   uses: checkmarx/kics-github-action@v1.6.3
-      #   with:
-      #     path: '${{ github.workspace }}'
-      #     output_path: '${{ github.workspace }}/.results'
-      #     ignore_on_exit: results
-      #     cloud_provider: 'aws, azure, gcp'
-      #     token: ${{ secrets.GITHUB_TOKEN }}
+      - name: IaC security (KICS)
+        uses: checkmarx/kics-github-action@v1.6.3
+        with:
+          path: '${{ github.workspace }}'
+          output_path: '${{ github.workspace }}/.results'
+          ignore_on_exit: results
+          cloud_provider: 'aws, azure, gcp'
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Get Examples
         if: ${{ inputs.deployment == 'true' }}
@@ -88,28 +88,28 @@ jobs:
           check_name: 'Terraform Base check'
           #fail_on: 'errors'
 
-  tf_deploy_example_tfvars:
-    name: Deploy Test (${{ matrix.tfvars }})
-    runs-on: [Linux]
-    if: ${{ github.event_name == 'pull_request' && inputs.deployment == 'true' }}
-    needs: tf_base
-    strategy:
-      matrix:
-        tfvars: ${{ fromJson(needs.tf_base.outputs.files) }}
-    steps:
-      - name: Output results
-        run: |
-          echo ${{ matrix.tfvars }}
-
-  tf_deploy_example_dirs:
-    name: Deploy Test (${{ matrix.dir }})
-    runs-on: [Linux]
-    if: ${{ github.event_name == 'pull_request' && inputs.deployment == 'true' }}
-    needs: tf_base
-    strategy:
-      matrix:
-        dir: ${{ fromJson(needs.tf_base.outputs.dirs) }}
-    steps:
-      - name: Output results
-        run: |
-          echo ${{ matrix.dir }}
+  # tf_deploy_example_tfvars:
+  #   name: Deploy Test (${{ matrix.tfvars }})
+  #   runs-on: [Linux]
+  #   if: ${{ github.event_name == 'pull_request' && inputs.deployment == 'true' }}
+  #   needs: tf_base
+  #   strategy:
+  #     matrix:
+  #       tfvars: ${{ fromJson(needs.tf_base.outputs.files) }}
+  #   steps:
+  #     - name: Output results
+  #       run: |
+  #         echo ${{ matrix.tfvars }}
+  # 
+  # tf_deploy_example_dirs:
+  #   name: Deploy Test (${{ matrix.dir }})
+  #   runs-on: [Linux]
+  #   if: ${{ github.event_name == 'pull_request' && inputs.deployment == 'true' }}
+  #   needs: tf_base
+  #   strategy:
+  #     matrix:
+  #       dir: ${{ fromJson(needs.tf_base.outputs.dirs) }}
+  #   steps:
+  #     - name: Output results
+  #       run: |
+  #         echo ${{ matrix.dir }}
