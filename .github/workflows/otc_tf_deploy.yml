@@ -1,0 +1,21 @@
+on:
+  workflow_call:
+    inputs:
+      env:
+        required: false
+        type: string
+      gh_runner:
+        required: false
+        type: string
+    secrets:
+      token:
+        required: false
+
+jobs:
+  test:
+    name: Test
+    runs-on: [${{ inputs.gh_runner}}]
+    steps:
+      - name: Hello
+        run: |
+          echo "Hello World"
