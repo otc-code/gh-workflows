@@ -12,9 +12,9 @@ on:
         required: false
 
 jobs:
-  test:
-    name: Test
-    runs-on: [${{ inputs.gh_runner}}]
+  tf_docs:
+    name: Update docs
+    runs-on: [Linux]
     steps:
       - uses: actions/checkout@v3
         with:
