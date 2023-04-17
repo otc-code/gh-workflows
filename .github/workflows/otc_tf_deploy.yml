@@ -13,9 +13,9 @@ on:
 
 jobs:
   test:
-    name: Test
-    runs-on: [${{ inputs.gh_runner}}]
-    steps:
+  name: Test
+  runs-on: [${{ inputs.gh_runner}}]
+  steps:
       - name: Hello
         run: |
           echo "Hello World"
